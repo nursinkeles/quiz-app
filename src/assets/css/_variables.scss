@@ -1,0 +1,11 @@
+$primary-color: #a0d2eb;
+$secondary-color: #e5eaf5;
+$accent-color: #d0bdf4;
+$highlight-color: #845bb3;
+$dark-color: #494d5f;
+
+@mixin align-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

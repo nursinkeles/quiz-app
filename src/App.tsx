@@ -1,12 +1,11 @@
-import './App.css';
-import { Questions } from './pages/Questions';
-
-const App:React.FC =()  => {
+import { ChakraProvider } from "@chakra-ui/react";
+import { Container } from "./components/Container";
+const App: React.FC = () => {
   return (
-    <div>
-      <Questions />
-    </div>
+    <ChakraProvider>
+      <Container />
+    </ChakraProvider>
   );
-}
+};
 
 export default App;

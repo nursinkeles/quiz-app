@@ -1,30 +1,68 @@
-.card {
-  background: $secondary-color !important;
+.container {
   @include align-center();
   border-radius: 10px !important;
   box-shadow: 0 5px 15px $dark-color !important;
   cursor: pointer;
 }
-// .btn {
-//   position: absolute;
-//   top: 35px;
-//   right: 35px;
-//   background-color: #fff;
-//   border: none;
-//   padding: 10px 30px;
-//   cursor: pointer;
-//   font-size: 18px;
-//   box-shadow: 0 1px 5px #706f6f;
-//   border-radius: 5px;
-//   transition: 1000ms;
-//   a {
-//     text-decoration: none;
-//     transition: 1000ms;
-//     color: #c8aa8c;
-//   }
-//   &:hover {
-//     transform: scale(0.9);
-//     box-shadow: 0 5px 10px #706f6f;
-//     background-color: #000;
-//   }
-// }
+.card {
+  @extend .container;
+  background: $secondary-color !important;
+}
+
+.gradient {
+  @extend .container;
+  background: linear-gradient(
+    334deg,
+    $primary-color,
+    $accent-color,
+    $dark-color
+  );
+  background-size: 180% 180%;
+  animation: gradient-animation 6s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.header {
+  text-align: center;
+  color: $secondary-color;
+  text-shadow: 4px 4px 2px $dark-color;
+  font-size: 45px !important;
+
+  span {
+    font-size: 50px;
+    color: $highlight-color;
+    text-shadow: 4px 4px 2px $dark-color;
+  }
+}
+
+.btn {
+  margin-top: 3rem;
+  background: $secondary-color;
+  color: $dark-color;
+  padding: 10px 35px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 1px 5px $dark-color;
+  border-radius: 5px;
+  transition: 1000ms;
+  text-shadow: 1px 2px 2px $dark-color;
+
+  &:hover {
+    transform: scale(0.9);
+    color: $secondary-color;
+    box-shadow: 0 5px 10px $secondary-color;
+    background: $dark-color;
+    text-shadow: 1px 2px 2px $secondary-color;
+  }
+}

@@ -1,11 +1,19 @@
-import React from 'react'
+import { Box } from "@chakra-ui/react";
+import { Button } from "../components/Button";
 
 const StartPage = () => {
-  return (
-    <div>
-      StartPage
-    </div>
-  )
-}
+  const handleClick = () => {
+    console.log("handleClick");
+  };
 
-export default StartPage
+  return (
+    <Box>
+      <h1 className="header">
+        READY <br /> FOR A <br /> <span>QUIZ?</span>
+      </h1>
+      <Button text="START" onClick={handleClick} />
+    </Box>
+  );
+};
+
+export default StartPage;

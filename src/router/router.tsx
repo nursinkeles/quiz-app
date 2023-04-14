@@ -1,6 +1,6 @@
 import StartPage from "../pages/StartPage";
 import InfoPage from "../pages/InfoPage";
-import { Questions } from "../pages/Questions";
+import QuestionsPage from "../pages/QuestionsPage";
 import ResultPage from "../pages/ResultPage";
 import CategoryPage from "../pages/CategoryPage";
 import { createBrowserRouter } from "react-router-dom";
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/questions",
-    element: <Questions />,
+    element: <QuestionsPage />,
   },
   {
     path: "/result",

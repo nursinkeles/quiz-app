@@ -1,4 +1,4 @@
-import { Box, Text, CardBody } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 interface Category {
   id: number;
@@ -11,7 +11,7 @@ interface CategoryListProps {
 
 export const CategoryList = ({ categories }: CategoryListProps) => {
   return (
-    <CardBody>
+    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" mt="3">
       {categories.map((category) => (
         <Box
           key={category.id}
@@ -23,6 +23,6 @@ export const CategoryList = ({ categories }: CategoryListProps) => {
           <Text p="2">{category.name}</Text>
         </Box>
       ))}
-    </CardBody>
+    </Box>
   );
 };

@@ -1,21 +1,18 @@
 import { Card, Flex } from "@chakra-ui/react";
-import { CategoryList } from "./CategoryList";
 import { Header } from "./Header";
+import { Body } from "./Body";
 
 export const Container = () => {
-  const categories = [
-    { id: 1, name: "Elektronik" },
-    { id: 2, name: "Kitap" },
-    { id: 3, name: "Müzik" },
-    { id: 4, name: "Oyuncak" },
-    { id: 5, name: "Ev ve Bahçe" },
-  ];
-
   return (
-    <Flex alignItems="center" justifyContent="center">
-      <Card w="50%" h="500px" maxW="sm" className="card">
-        <Header />
-        <CategoryList categories={categories} />
+    <Flex alignItems="center" justifyContent="center" h="100vh">
+      <Card
+        w="50%"
+        h="500px"
+        maxW="sm"
+        className={window.location.pathname === "/" ? "gradient" : "card"}
+      >
+        {/* <Header /> */}
+        <Body />
       </Card>
     </Flex>
   );

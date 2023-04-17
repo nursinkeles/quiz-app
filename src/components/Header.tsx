@@ -5,12 +5,17 @@ import { FindRoute } from "../constants/Constant";
 // import { RightArrowIcon } from "../assets/icon/RightArrowIcon";
 export const Header = () => {
   return (
-    <CardHeader>
-      <Heading size="md" className="title">
-        {FindRoute?.title}
-      </Heading>
-      {/* <LeftArrowIcon />
+    <>
+      {FindRoute?.title && (
+        <CardHeader>
+          <Heading size="md" className="title">
+            {FindRoute?.title}
+          </Heading>
+
+          {/* <LeftArrowIcon />
       <RightArrowIcon /> */}
-    </CardHeader>
+        </CardHeader>
+      )}
+    </>
   );
 };

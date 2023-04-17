@@ -45,7 +45,15 @@
     text-shadow: 4px 4px 2px $dark-color;
   }
 }
-
+.title {
+  text-align: center;
+  margin-top: -1.5rem;
+  padding: 10px 20px;
+  color: $secondary-color;
+  background: $primary-color;
+  border-radius: 5px;
+  text-shadow: 1px 2px 2px $highlight-color;
+}
 .btn {
   margin-top: 3rem;
   background: $secondary-color;
@@ -64,5 +72,24 @@
     box-shadow: 0 5px 10px $secondary-color;
     background: $dark-color;
     text-shadow: 1px 2px 2px $secondary-color;
+  }
+}
+
+.category-list {
+  max-height: 360px;
+  overflow-y: scroll;
+  text-align: center;
+
+  div {
+    color: $secondary-color;
+    background: $highlight-color;
+    margin-top: 1rem;
+    border: 2px dotted $dark-color;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: 1000ms;
+    &:hover {
+      background: $accent-color;
+    }
   }
 }

@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import { Button } from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const StartPage = () => {
-  const handleClick = () => {
-    console.log("handleClick");
-  };
+  const navigate = useNavigate();
+
+  const handleClick = () => navigate("/categories");
 
   return (
     <Box>

@@ -12,7 +12,14 @@ const QuestionsPage: React.FC<QuestionsProps> = () => {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchQuestions());
+      dispatch(
+        fetchQuestions({
+          amount: 10,
+          difficulty: "hard",
+          type: "multiple",
+          category: 9, //selectedCategoryId
+        })
+      );
     }
   }, [dispatch, status]);
 

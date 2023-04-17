@@ -1,14 +1,16 @@
 import { CardHeader, Heading } from "@chakra-ui/react";
-import { LeftArrowIcon } from "../assets/icon/LeftArrowIcon";
-import { RightArrowIcon } from "../assets/icon/RightArrowIcon";
+import { FindRoute } from "../constants/Constant";
+
+// import { LeftArrowIcon } from "../assets/icon/LeftArrowIcon";
+// import { RightArrowIcon } from "../assets/icon/RightArrowIcon";
 export const Header = () => {
   return (
     <CardHeader>
-      <Heading size="md" textAlign="center">
-        Choose Category
+      <Heading size="md" className="title">
+        {FindRoute?.title}
       </Heading>
-      <LeftArrowIcon />
-      <RightArrowIcon />
+      {/* <LeftArrowIcon />
+      <RightArrowIcon /> */}
     </CardHeader>
   );
 };

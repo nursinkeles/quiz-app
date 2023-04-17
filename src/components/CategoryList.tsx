@@ -11,15 +11,9 @@ interface CategoryListProps {
 
 export const CategoryList = ({ categories }: CategoryListProps) => {
   return (
-    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" mt="3">
+    <Box className="category-list">
       {categories.map((category) => (
-        <Box
-          key={category.id}
-          borderWidth="1px"
-          borderRadius="lg"
-          overflow="hidden"
-          mt="3"
-        >
+        <Box key={category.id}>
           <Text p="2">{category.name}</Text>
         </Box>
       ))}

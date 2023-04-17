@@ -11,7 +11,7 @@ export const Container = () => {
         maxW="sm"
         className={window.location.pathname === "/" ? "gradient" : "card"}
       >
-        {/* <Header /> */}
+        <Header />
         <Body />
       </Card>
     </Flex>

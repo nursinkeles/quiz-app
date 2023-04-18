@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchQuestions } from "../redux/quizSlice";
 import { RootState, AppDispatch } from "../redux/store";
+import { Loading } from "../components/Loading";
 
 type QuestionsProps = {};
 const QuestionsPage: React.FC<QuestionsProps> = () => {
@@ -10,23 +11,26 @@ const QuestionsPage: React.FC<QuestionsProps> = () => {
   const error = useSelector((state: RootState) => state.quiz.error);
   const dispatch: AppDispatch = useDispatch();
 
+  const selectedCategoryId = JSON.parse(
+    localStorage.getItem("category") || "null"
+  );
+
   useEffect(() => {
-    if (status === "idle") {
+    selectedCategoryId !== undefined &&
+      status === "idle" &&
       dispatch(
         fetchQuestions({
           amount: 10,
           difficulty: "hard",
           type: "multiple",
-          category: 9, //selectedCategoryId
+          category: selectedCategoryId,
         })
       );
-    }
-  }, [dispatch, status]);
+  }, [dispatch, status, selectedCategoryId]);
 
   return (
     <div>
-      <h1>Quiz App</h1>
-      {status === "loading" && <p>Loading...</p>}
+      {status === "loading" && <Loading />}
       {error && <p>Error: {error}</p>}
       <ul>
         {quiz.map((item, index) => (

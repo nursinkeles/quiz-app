@@ -1,33 +1,35 @@
-import { useState } from "react";
 import { CategoryList } from "../components/CategoryList";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCategories } from "../redux/categorySlice";
+import { fetchCategories, selectCategory } from "../redux/categorySlice";
 import { RootState, AppDispatch } from "../redux/store";
+import { useNavigate } from "react-router-dom";
 
 const CategoryPage = () => {
-  // const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
-
-  // const handleCategoryChange = (
-  //   event: React.ChangeEvent<HTMLSelectElement>
-  // ) => {
-  //   setSelectedCategoryId(parseInt(event.target.value));
-  // };
-
   const categories = useSelector((state: RootState) => state.category.items);
-  const status = useSelector((state: RootState) => state.quiz.status);
+  const status = useSelector((state: RootState) => state.category.status);
+  const selectedCategoryId = useSelector(
+    (state: RootState) => state.category.selectedCategoryId
+  );
+  const navigate = useNavigate();
 
   const dispatch: AppDispatch = useDispatch();
 
-  console.log("category", categories);
-
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchCategories());
-    }
+    status === "idle" && dispatch(fetchCategories());
   }, [dispatch, status]);
 
-  return <CategoryList categories={categories} />;
+  const handleCategoryClick = (categoryId: number) => {
+    dispatch(selectCategory(categoryId));
+    navigate("/info");
+  };
+
+  return (
+    <CategoryList
+      categories={categories}
+      onCategoryClick={handleCategoryClick}
+    />
+  );
 };
 
 export default CategoryPage;

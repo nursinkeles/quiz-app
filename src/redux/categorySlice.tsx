@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -6,11 +7,13 @@ export interface QuizState {
   items: any[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error?: string;
+  selectedCategoryId?: number;
 }
 
 const initialState: QuizState = {
   items: [],
   status: "idle",
+  selectedCategoryId: undefined,
 };
 
 interface Category {
@@ -19,7 +22,6 @@ interface Category {
 }
 
 const BASE_URL = "https://opentdb.com/";
-
 export const fetchCategories = createAsyncThunk(
   "categories/getCategory",
   async () => {
@@ -32,11 +34,15 @@ export const fetchCategories = createAsyncThunk(
     }));
   }
 );
-
 export const categorySlice = createSlice({
   name: "category",
   initialState,
-  reducers: {},
+  reducers: {
+    selectCategory: (state, action: PayloadAction<number>) => {
+      state.selectedCategoryId = action.payload;
+      localStorage.setItem("category", JSON.stringify(action.payload));
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -59,5 +65,6 @@ export const categorySlice = createSlice({
       );
   },
 });
+export const { selectCategory } = categorySlice.actions;
 
 export default categorySlice.reducer;

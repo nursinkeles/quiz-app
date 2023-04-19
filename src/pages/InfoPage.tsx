@@ -1,8 +1,27 @@
+import { Button } from "../components/Button";
+import { useNavigate } from "react-router-dom";
+
 const InfoPage = () => {
-  const selectedCategoryId = JSON.parse(
-    localStorage.getItem("category") || "null"
+  const navigate = useNavigate();
+  const selectedCategoryName = JSON.parse(
+    localStorage.getItem("categoryName") || "null"
   );
-  return <div>Category:{selectedCategoryId}</div>;
+
+  const selectedDifficulty = JSON.parse(
+    localStorage.getItem("difficulty") || "null"
+  );
+
+  const handleClick = () => navigate("/questions");
+
+  return (
+    <div>
+      <p>Category:{selectedCategoryName.name}</p>
+      <p> Difficulty:{selectedDifficulty}</p>
+      <p> Number Of Questions : 10 </p>
+      <p> Question type: Multiple</p>
+      <Button text="START" onClick={handleClick} />
+    </div>
+  );
 };
 
 export default InfoPage;

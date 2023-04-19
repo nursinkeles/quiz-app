@@ -12,6 +12,8 @@ const CategoryPage = () => {
     (state: RootState) => state.category.selectedCategoryId
   );
   const navigate = useNavigate();
+  const findCategory = categories.find((c) => c.id === selectedCategoryId);
+  localStorage.setItem("categoryName", JSON.stringify(findCategory));
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -21,7 +23,7 @@ const CategoryPage = () => {
 
   const handleCategoryClick = (categoryId: number) => {
     dispatch(selectCategory(categoryId));
-    navigate("/info");
+    navigate("/difficulty");
   };
 
   return (

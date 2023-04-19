@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -34,6 +33,7 @@ export const fetchCategories = createAsyncThunk(
     }));
   }
 );
+
 export const categorySlice = createSlice({
   name: "category",
   initialState,

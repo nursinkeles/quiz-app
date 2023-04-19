@@ -62,6 +62,7 @@
 import { Routes, Route } from "react-router-dom";
 import StartPage from "../pages/StartPage";
 import CategoryPage from "../pages/CategoryPage";
+import DifficultyPage from "../pages/DifficultyPage";
 import InfoPage from "../pages/InfoPage";
 import QuestionsPage from "../pages/QuestionsPage";
 import ResultPage from "../pages/ResultPage";
@@ -71,6 +72,7 @@ export const router = () => {
     <Routes>
       <Route path="/" element={<StartPage />} />
       <Route path="/categories" element={<CategoryPage />} />
+      <Route path="/difficulty" element={<DifficultyPage />} />
       <Route path="/info" element={<InfoPage />} />
       <Route path="/questions" element={<QuestionsPage />} />
       <Route path="/result" element={<ResultPage />} />

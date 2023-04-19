@@ -1,8 +1,14 @@
 .container {
-  @include align-center();
+  // @include align-center();
   border-radius: 10px !important;
   box-shadow: 0 5px 15px $dark-color !important;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+}
+.center {
+  @include align-center();
 }
 .card {
   @extend .container;
@@ -54,6 +60,7 @@
   border-radius: 5px;
   text-shadow: 1px 2px 2px $highlight-color;
 }
+
 .btn {
   margin-top: 3rem;
   background: $secondary-color;
@@ -75,7 +82,7 @@
   }
 }
 
-.category-list {
+.list-items {
   max-height: 360px;
   overflow-y: scroll;
   text-align: center;

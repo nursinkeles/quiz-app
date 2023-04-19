@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box, Text } from "@chakra-ui/react";
 
 interface Category {
@@ -19,7 +18,7 @@ export const CategoryList = ({
     onCategoryClick(categoryId);
   };
   return (
-    <Box className="category-list">
+    <Box className="list-items">
       {categories.map((category) => (
         <Box key={category.id} onClick={() => handleCategoryClick(category.id)}>
           <Text p="2">{category.name}</Text>

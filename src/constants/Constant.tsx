@@ -1,5 +1,6 @@
 import StartPage from "../pages/StartPage";
 import CategoryPage from "../pages/CategoryPage";
+import DifficultyPage from "../pages/DifficultyPage";
 import InfoPage from "../pages/InfoPage";
 import QuestionsPage from "../pages/QuestionsPage";
 import ResultPage from "../pages/ResultPage";
@@ -11,11 +12,22 @@ export const ROUTE = [
     component: <CategoryPage />,
     title: "Choose Category",
   },
-  { pathname: "/info", component: <InfoPage />, title: "info page" },
-  { pathname: "/questions", component: <QuestionsPage />, title: "questions" },
+  {
+    pathname: "/difficulty",
+    component: <DifficultyPage />,
+    title: "Choose Your Level",
+  },
+  { pathname: "/info", component: <InfoPage />, title: "About Questions" },
+  {
+    pathname: "/questions",
+    component: <QuestionsPage />,
+    title: "Questions",
+  },
   { pathname: "/result", component: <ResultPage />, title: "" },
 ];
 
 export const FindRoute = ROUTE.find(
   (item) => item.pathname === window.location.pathname
 );
+
+export const DIFFICULTY = ["Easy", "Medium", "Hard"];

@@ -14,14 +14,16 @@ const QuestionsPage: React.FC<QuestionsProps> = () => {
   const selectedCategoryId = JSON.parse(
     localStorage.getItem("category") || "null"
   );
-
+  const selectedDifficulty = JSON.parse(
+    localStorage.getItem("difficulty") || "null"
+  );
   useEffect(() => {
     selectedCategoryId !== undefined &&
       status === "idle" &&
       dispatch(
         fetchQuestions({
           amount: 10,
-          difficulty: "hard",
+          difficulty: selectedDifficulty,
           type: "multiple",
           category: selectedCategoryId,
         })

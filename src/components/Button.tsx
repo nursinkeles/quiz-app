@@ -5,8 +5,10 @@ interface ButtonProps {
 
 export const Button = ({ text, onClick }: ButtonProps) => {
   return (
-    <button className="btn" onClick={onClick}>
-      {text}
-    </button>
+    <div className="center">
+      <button className="btn" onClick={onClick}>
+        {text}
+      </button>
+    </div>
   );
 };

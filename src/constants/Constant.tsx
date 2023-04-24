@@ -6,24 +6,37 @@ import QuestionsPage from "../pages/QuestionsPage";
 import ResultPage from "../pages/ResultPage";
 
 export const ROUTE = [
-  { pathname: "/", component: <StartPage />, title: "" },
+  { pathname: "/", component: <StartPage />, title: "", class: "gradient" },
   {
     pathname: "/categories",
     component: <CategoryPage />,
     title: "Choose Category",
+    class: "card",
   },
   {
     pathname: "/difficulty",
     component: <DifficultyPage />,
     title: "Choose Your Level",
+    class: "card",
   },
-  { pathname: "/info", component: <InfoPage />, title: "About Questions" },
+  {
+    pathname: "/info",
+    component: <InfoPage />,
+    title: "About Questions",
+    class: "dark",
+  },
   {
     pathname: "/questions",
     component: <QuestionsPage />,
     title: "Questions",
+    class: "card",
   },
-  { pathname: "/result", component: <ResultPage />, title: "" },
+  {
+    pathname: "/result",
+    component: <ResultPage />,
+    title: "Quiz Completed!",
+    class: "card",
+  },
 ];
 
 export const FindRoute = ROUTE.find(

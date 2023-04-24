@@ -14,11 +14,19 @@ const InfoPage = () => {
   const handleClick = () => navigate("/questions");
 
   return (
-    <div>
-      <p>Category:{selectedCategoryName.name}</p>
-      <p> Difficulty:{selectedDifficulty}</p>
-      <p> Number Of Questions : 10 </p>
-      <p> Question type: Multiple</p>
+    <div className="info-quiz">
+      <p>
+        <b>Category:</b> {selectedCategoryName.name}
+      </p>
+      <p>
+        <b>Difficulty:</b> {selectedDifficulty}
+      </p>
+      <p>
+        <b> Number Of Questions:</b> 10
+      </p>
+      <p>
+        <b> Question type:</b> Multiple
+      </p>
       <Button text="START" onClick={handleClick} />
     </div>
   );

@@ -9,3 +9,16 @@ $dark-color: #494d5f;
   justify-content: center;
   align-items: center;
 }
+
+@mixin list-item() {
+  color: $secondary-color;
+  background: $highlight-color;
+  margin-top: 1rem;
+  border: 2px dotted $dark-color;
+  border-radius: 5px;
+  font-size: 15px;
+  transition: 1000ms;
+  &:hover {
+    background: $accent-color;
+  }
+}

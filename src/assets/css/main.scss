@@ -1,5 +1,4 @@
 .container {
-  // @include align-center();
   border-radius: 10px !important;
   box-shadow: 0 5px 15px $dark-color !important;
   cursor: pointer;
@@ -14,7 +13,10 @@
   @extend .container;
   background: $secondary-color !important;
 }
-
+.dark {
+  @extend .container;
+  background: $dark-color !important;
+}
 .gradient {
   @extend .container;
   background: linear-gradient(
@@ -88,15 +90,18 @@
   text-align: center;
 
   div {
-    color: $secondary-color;
-    background: $highlight-color;
-    margin-top: 1rem;
-    border: 2px dotted $dark-color;
-    border-radius: 5px;
-    font-size: 15px;
-    transition: 1000ms;
-    &:hover {
-      background: $accent-color;
+    @include list-item;
+  }
+}
+
+.info-quiz {
+  p {
+    @include list-item;
+    margin: 1rem 1rem 0;
+    padding: 5px 10px;
+
+    b {
+      color: $primary-color;
     }
   }
 }

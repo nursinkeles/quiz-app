@@ -6,7 +6,6 @@ import QuestionsPage from "../pages/QuestionsPage";
 import ResultPage from "../pages/ResultPage";
 
 export const ROUTE = [
-  { pathname: "/", component: <StartPage />, title: "", class: "gradient" },
   {
     pathname: "/categories",
     component: <CategoryPage />,
@@ -37,10 +36,8 @@ export const ROUTE = [
     title: "Quiz Completed!",
     class: "card",
   },
+  { pathname: "/", component: <StartPage />, title: "", class: "gradient" },
 ];
 
-export const FindRoute = ROUTE.find(
-  (item) => item.pathname === window.location.pathname
-);
-
 export const DIFFICULTY = ["Easy", "Medium", "Hard"];
+export let DIF: any = [];

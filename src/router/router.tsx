@@ -70,12 +70,12 @@ import ResultPage from "../pages/ResultPage";
 export const router = () => {
   return (
     <Routes>
-      <Route path="/" element={<StartPage />} />
       <Route path="/categories" element={<CategoryPage />} />
       <Route path="/difficulty" element={<DifficultyPage />} />
       <Route path="/info" element={<InfoPage />} />
       <Route path="/questions" element={<QuestionsPage />} />
       <Route path="/result" element={<ResultPage />} />
+      <Route path="/" element={<StartPage />} />
     </Routes>
   );
 };

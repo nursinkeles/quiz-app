@@ -1,20 +1,20 @@
-import { CategoryList } from "../components/CategoryList";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCategories, selectCategory } from "../redux/categorySlice";
-import { RootState, AppDispatch } from "../redux/store";
+import {
+  fetchCategories,
+  selectCategory,
+  statusSelector,
+} from "../redux/categorySlice";
+import { AppDispatch } from "../redux/store";
 import { useNavigate } from "react-router-dom";
+import { useSelectedCategory } from "../hooks/useSelectedCategory";
+import { CategoryList } from "../components/CategoryList";
 
 const CategoryPage = () => {
-  const categories = useSelector((state: RootState) => state.category.items);
-  const status = useSelector((state: RootState) => state.category.status);
-  const selectedCategoryId = useSelector(
-    (state: RootState) => state.category.selectedCategoryId
-  );
-  const navigate = useNavigate();
-  const findCategory = categories.find((c) => c.id === selectedCategoryId);
-  localStorage.setItem("categoryName", JSON.stringify(findCategory));
+  const status = useSelector(statusSelector);
+  const { categories } = useSelectedCategory();
 
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {

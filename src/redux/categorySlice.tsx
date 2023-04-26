@@ -1,24 +1,8 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-export interface QuizState {
-  items: any[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error?: string;
-  selectedCategoryId?: number;
-}
-
-const initialState: QuizState = {
-  items: [],
-  status: "idle",
-  selectedCategoryId: undefined,
-};
-
-interface Category {
-  id: number;
-  name: string;
-}
+import { RootState } from "../redux/store";
+import { initialState, Category } from "../types/Type";
 
 const BASE_URL = "https://opentdb.com/";
 export const fetchCategories = createAsyncThunk(
@@ -40,7 +24,9 @@ export const categorySlice = createSlice({
   reducers: {
     selectCategory: (state, action: PayloadAction<number>) => {
       state.selectedCategoryId = action.payload;
-      localStorage.setItem("category", JSON.stringify(action.payload));
+    },
+    selectDifficulty: (state, action: PayloadAction<string>) => {
+      state.selectedDifficulty = action.payload;
     },
   },
 
@@ -65,6 +51,22 @@ export const categorySlice = createSlice({
       );
   },
 });
-export const { selectCategory } = categorySlice.actions;
+const categoriesSelector = (state: RootState) => state.category.items;
+const statusSelector = (state: RootState) => state.category.status;
+const errorSelector = (state: RootState) => state.category.error;
+const selectedCategorySelector = (state: RootState) =>
+  state.category.selectedCategoryId;
+const selectedDifficultySelector = (state: RootState) =>
+  state.category.selectedDifficulty;
+
+export {
+  categoriesSelector,
+  statusSelector,
+  errorSelector,
+  selectedCategorySelector,
+  selectedDifficultySelector,
+};
+
+export const { selectCategory, selectDifficulty } = categorySlice.actions;
 
 export default categorySlice.reducer;

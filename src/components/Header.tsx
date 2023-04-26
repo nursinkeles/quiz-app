@@ -1,15 +1,17 @@
 import { CardHeader, Heading } from "@chakra-ui/react";
-import { FindRoute } from "../constants/Constant";
-
 // import { LeftArrowIcon } from "../assets/icon/LeftArrowIcon";
 // import { RightArrowIcon } from "../assets/icon/RightArrowIcon";
+import { useCurrentRoute } from "../hooks/useCurrentRoute";
+
 export const Header = () => {
+  const currentRoute = useCurrentRoute();
+
   return (
     <>
-      {FindRoute?.title && (
+      {currentRoute?.title && (
         <CardHeader>
           <Heading size="md" className="title">
-            {FindRoute?.title}
+            {currentRoute?.title}
           </Heading>
 
           {/* <LeftArrowIcon />

@@ -1,34 +1,36 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchQuestions } from "../redux/quizSlice";
-import { RootState, AppDispatch } from "../redux/store";
+import {
+  fetchQuestions,
+  quizSelector,
+  statusSelector,
+  errorSelector,
+} from "../redux/quizSlice";
+import { AppDispatch } from "../redux/store";
 import { Loading } from "../components/Loading";
+import { useSelectedCategory } from "../hooks/useSelectedCategory";
 
-type QuestionsProps = {};
-const QuestionsPage: React.FC<QuestionsProps> = () => {
-  const quiz = useSelector((state: RootState) => state.quiz.items);
-  const status = useSelector((state: RootState) => state.quiz.status);
-  const error = useSelector((state: RootState) => state.quiz.error);
+const QuestionsPage = () => {
+  const quiz = useSelector(quizSelector);
+  const status = useSelector(statusSelector);
+  const error = useSelector(errorSelector);
+
+  const { selectedDifficulty, selectedCategoryId } = useSelectedCategory();
   const dispatch: AppDispatch = useDispatch();
 
-  const selectedCategoryId = JSON.parse(
-    localStorage.getItem("category") || "null"
-  );
-  const selectedDifficulty = JSON.parse(
-    localStorage.getItem("difficulty") || "null"
-  );
   useEffect(() => {
     selectedCategoryId !== undefined &&
+      selectedDifficulty !== undefined &&
       status === "idle" &&
       dispatch(
         fetchQuestions({
           amount: 10,
-          difficulty: selectedDifficulty,
+          difficulty: selectedDifficulty.toLowerCase(),
           type: "multiple",
           category: selectedCategoryId,
         })
       );
-  }, [dispatch, status, selectedCategoryId]);
+  }, [dispatch, status, selectedCategoryId, selectedDifficulty]);
 
   return (
     <div>

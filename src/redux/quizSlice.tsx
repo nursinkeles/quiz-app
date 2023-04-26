@@ -1,34 +1,13 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../redux/store";
+import { QuestionRequestParams, QuizState2 } from "../types/Type";
 
-export interface QuizState {
-  items: any[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error?: string;
-}
-
-const initialState: QuizState = {
+const initialState: QuizState2 = {
   items: [],
   status: "idle",
 };
-interface QuestionRequestParams {
-  amount: number;
-  difficulty: string;
-  type: string;
-  category: number;
-  [key: string]: string | number;
-}
-// export const fetchQuestions = createAsyncThunk(
-//   "questions/getQuestion",
-//   async () => {
-//     const res = await axios(
-//       "https://opentdb.com/api.php?amount=10&difficulty=hard&type=multiple&category=9"
-//     );
-//     console.log("res", res.data.results);
-//     return res.data;
-//   }
-// );
 const BASE_URL = "https://opentdb.com/";
 
 export const fetchQuestions = createAsyncThunk(
@@ -69,5 +48,10 @@ export const quizSlice = createSlice({
       );
   },
 });
+const quizSelector = (state: RootState) => state.quiz.items;
+const statusSelector = (state: RootState) => state.quiz.status;
+const errorSelector = (state: RootState) => state.quiz.error;
+
+export { quizSelector, statusSelector, errorSelector };
 
 export default quizSlice.reducer;

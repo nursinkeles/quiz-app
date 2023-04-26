@@ -1,5 +1,5 @@
-import { FindRoute } from "../constants/Constant";
+import { router } from "../router/router";
 
 export const Body = () => {
-  return <div>{FindRoute?.component}</div>;
+  return <div>{router()}</div>;
 };

@@ -1,22 +1,16 @@
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
-
+import { useSelectedCategory } from "../hooks/useSelectedCategory";
 const InfoPage = () => {
+  const { selectedCategoryName, selectedDifficulty } = useSelectedCategory();
   const navigate = useNavigate();
-  const selectedCategoryName = JSON.parse(
-    localStorage.getItem("categoryName") || "null"
-  );
-
-  const selectedDifficulty = JSON.parse(
-    localStorage.getItem("difficulty") || "null"
-  );
 
   const handleClick = () => navigate("/questions");
 
   return (
     <div className="info-quiz">
       <p>
-        <b>Category:</b> {selectedCategoryName.name}
+        <b>Category:</b> {selectedCategoryName?.name}
       </p>
       <p>
         <b>Difficulty:</b> {selectedDifficulty}

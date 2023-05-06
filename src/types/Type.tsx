@@ -13,6 +13,13 @@ export interface ButtonProps {
   onClick: () => void;
 }
 
+export enum ApiStatus {
+  IDLE = "idle",
+  LOADING = "loading",
+  SUCCESS = "succeeded",
+  FAILED = "failed",
+}
+
 export interface Category {
   id: number;
   name: string;
@@ -33,7 +40,7 @@ interface QuizState {
 
 export const initialState: QuizState = {
   items: [],
-  status: "idle",
+  status: ApiStatus.IDLE,
   selectedCategoryId: undefined,
   selectedDifficulty: undefined,
 };
@@ -51,3 +58,14 @@ export interface QuestionRequestParams {
   category: number;
   [key: string]: string | number;
 }
+
+export type RouteType = {
+  pathname: string;
+  component: JSX.Element;
+  title: string;
+  class: string;
+};
+
+export type ErrorProps = {
+  text: string | undefined;
+};

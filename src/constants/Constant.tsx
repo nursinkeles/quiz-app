@@ -4,8 +4,9 @@ import DifficultyPage from "../pages/DifficultyPage";
 import InfoPage from "../pages/InfoPage";
 import QuestionsPage from "../pages/QuestionsPage";
 import ResultPage from "../pages/ResultPage";
+import { RouteType } from "../types/Type";
 
-export const ROUTE = [
+export const ROUTE: RouteType[] = [
   {
     pathname: "/categories",
     component: <CategoryPage />,
@@ -39,5 +40,4 @@ export const ROUTE = [
   { pathname: "/", component: <StartPage />, title: "", class: "gradient" },
 ];
 
-export const DIFFICULTY = ["Easy", "Medium", "Hard"];
-export let DIF: any = [];
+export const DIFFICULTY: string[] = ["Easy", "Medium", "Hard"];

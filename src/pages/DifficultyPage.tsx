@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { DIFFICULTY } from "../constants/Constant";
 import { Box, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
@@ -9,14 +10,15 @@ const DifficultyPage = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
 
-  const handleDifficultyClick = (e: any) => {
-    dispatch(selectDifficulty(e.target.innerText));
+  const handleDifficultyClick = (e: MouseEvent<HTMLDivElement>) => {
+    const buttonText = (e.target as HTMLDivElement).innerText;
+    dispatch(selectDifficulty(buttonText));
     navigate("/info");
   };
   return (
     <Box className="list-items">
-      {DIFFICULTY.map((item, index) => (
-        <Box key={index} onClick={(e) => handleDifficultyClick(e)}>
+      {DIFFICULTY.map((item: string, index: number) => (
+        <Box key={index} onClick={handleDifficultyClick}>
           <Text p="2">{item}</Text>
         </Box>
       ))}

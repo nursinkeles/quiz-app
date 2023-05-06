@@ -1,27 +1,21 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  fetchQuestions,
-  quizSelector,
-  statusSelector,
-  errorSelector,
-} from "../redux/quizSlice";
+import { quizSelector, quizStatusSelector } from "../redux/quizSlice";
 import { AppDispatch } from "../redux/store";
-import { Loading } from "../components/Loading";
 import { useSelectedCategory } from "../hooks/useSelectedCategory";
+import { fetchQuestions } from "../api/api";
+import { ApiStatus } from "../types/Type";
 
 const QuestionsPage = () => {
   const quiz = useSelector(quizSelector);
-  const status = useSelector(statusSelector);
-  const error = useSelector(errorSelector);
-
+  const quizStatus = useSelector(quizStatusSelector);
   const { selectedDifficulty, selectedCategoryId } = useSelectedCategory();
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     selectedCategoryId !== undefined &&
       selectedDifficulty !== undefined &&
-      status === "idle" &&
+      quizStatus === ApiStatus.IDLE &&
       dispatch(
         fetchQuestions({
           amount: 10,
@@ -30,12 +24,10 @@ const QuestionsPage = () => {
           category: selectedCategoryId,
         })
       );
-  }, [dispatch, status, selectedCategoryId, selectedDifficulty]);
+  }, [dispatch, quizStatus, selectedCategoryId, selectedDifficulty]);
 
   return (
     <div>
-      {status === "loading" && <Loading />}
-      {error && <p>Error: {error}</p>}
       <ul>
         {quiz.map((item, index) => (
           <li key={index}>{item.question}</li>

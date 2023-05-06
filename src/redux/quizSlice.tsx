@@ -1,26 +1,14 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../redux/store";
-import { QuestionRequestParams, QuizState2 } from "../types/Type";
+import { QuizState2 } from "../types/Type";
+import { fetchQuestions } from "../api/api";
+import { ApiStatus } from "../types/Type";
 
 const initialState: QuizState2 = {
   items: [],
-  status: "idle",
+  status: ApiStatus.IDLE,
 };
-const BASE_URL = "https://opentdb.com/";
-
-export const fetchQuestions = createAsyncThunk(
-  "questions/getQuestion",
-  async (params: QuestionRequestParams) => {
-    const queryString = Object.keys(params)
-      .map((key) => key + "=" + params[key])
-      .join("&");
-    const res = await axios(`${BASE_URL}api.php?${queryString}`);
-    console.log("res", res.data.results);
-    return res.data;
-  }
-);
 
 export const quizSlice = createSlice({
   name: "quiz",
@@ -39,19 +27,16 @@ export const quizSlice = createSlice({
           state.status = "succeeded";
         }
       )
-      .addCase(
-        fetchQuestions.rejected.type,
-        (state, action: PayloadAction<any>) => {
-          state.status = "failed";
-          state.error = action.payload;
-        }
-      );
+      .addCase(fetchQuestions.rejected.type, (state, action: any) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 const quizSelector = (state: RootState) => state.quiz.items;
-const statusSelector = (state: RootState) => state.quiz.status;
-const errorSelector = (state: RootState) => state.quiz.error;
+const quizStatusSelector = (state: RootState) => state.quiz.status;
+const quizErrorSelector = (state: RootState) => state.quiz.error;
 
-export { quizSelector, statusSelector, errorSelector };
+export { quizSelector, quizStatusSelector, quizErrorSelector };
 
 export default quizSlice.reducer;

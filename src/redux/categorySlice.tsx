@@ -1,22 +1,8 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../redux/store";
 import { initialState, Category } from "../types/Type";
-
-const BASE_URL = "https://opentdb.com/";
-export const fetchCategories = createAsyncThunk(
-  "categories/getCategory",
-  async () => {
-    const response = await axios.get(`${BASE_URL}api_category.php`);
-    const data = response.data.trivia_categories;
-
-    return data.map((category: any) => ({
-      id: category.id,
-      name: category.name,
-    }));
-  }
-);
+import { fetchCategories } from "../api/api";
 
 export const categorySlice = createSlice({
   name: "category",
@@ -42,18 +28,16 @@ export const categorySlice = createSlice({
           state.status = "succeeded";
         }
       )
-      .addCase(
-        fetchCategories.rejected.type,
-        (state, action: PayloadAction<any>) => {
-          state.status = "failed";
-          state.error = action.payload;
-        }
-      );
+      .addCase(fetchCategories.rejected.type, (state, action: any) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
+
 const categoriesSelector = (state: RootState) => state.category.items;
-const statusSelector = (state: RootState) => state.category.status;
-const errorSelector = (state: RootState) => state.category.error;
+const categoryStatusSelector = (state: RootState) => state.category.status;
+const categoryErrorSelector = (state: RootState) => state.category.error;
 const selectedCategorySelector = (state: RootState) =>
   state.category.selectedCategoryId;
 const selectedDifficultySelector = (state: RootState) =>
@@ -61,8 +45,8 @@ const selectedDifficultySelector = (state: RootState) =>
 
 export {
   categoriesSelector,
-  statusSelector,
-  errorSelector,
+  categoryStatusSelector,
+  categoryErrorSelector,
   selectedCategorySelector,
   selectedDifficultySelector,
 };

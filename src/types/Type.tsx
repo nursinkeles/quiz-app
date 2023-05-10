@@ -59,6 +59,15 @@ export interface QuestionRequestParams {
   [key: string]: string | number;
 }
 
+export type Question = {
+  category: string;
+  type: string;
+  difficulty: string;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
+};
+
 export type RouteType = {
   pathname: string;
   component: JSX.Element;

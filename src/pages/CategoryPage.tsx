@@ -5,7 +5,7 @@ import { AppDispatch } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 import { useSelectedCategory } from "../hooks/useSelectedCategory";
 import { CategoryList } from "../components/CategoryList";
-import { fetchCategories } from "../api/api";
+import { fetchCategories } from "../services/api";
 import { ApiStatus } from "../types/Type";
 
 const CategoryPage = () => {

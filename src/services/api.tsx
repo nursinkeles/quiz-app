@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Category } from "../types/Type";
+import { Category, Question } from "../types/Type";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { QuestionRequestParams } from "../types/Type";
 
@@ -18,6 +18,10 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
+const shuffleArray = (array: string[]) => {
+  return [...array].sort(() => Math.random() - 0.5);
+};
+
 export const fetchQuestions = createAsyncThunk(
   "questions/getQuestion",
   async (params: QuestionRequestParams) => {
@@ -27,7 +31,13 @@ export const fetchQuestions = createAsyncThunk(
     const res = await axios(
       `${process.env.REACT_APP_API_BASE_ENDPOINT}api.php?${queryString}`
     );
-    console.log("res", res.data.results);
-    return res.data;
+    const data = res.data.results.map((question: Question) => ({
+      ...question,
+      options: shuffleArray([
+        ...question.incorrect_answers,
+        question.correct_answer,
+      ]),
+    }));
+    return data;
   }
 );

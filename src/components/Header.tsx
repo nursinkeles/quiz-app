@@ -1,7 +1,7 @@
 import { CardHeader, Heading } from "@chakra-ui/react";
-// import { LeftArrowIcon } from "../assets/icon/LeftArrowIcon";
-// import { RightArrowIcon } from "../assets/icon/RightArrowIcon";
+import { Text, Box } from "@chakra-ui/react";
 import { useCurrentRoute } from "../hooks/useCurrentRoute";
+import { useSelectedCategory } from "../hooks/useSelectedCategory";
 
 export const Header = () => {
   const currentRoute = useCurrentRoute();
@@ -13,11 +13,24 @@ export const Header = () => {
           <Heading size="md" className="title">
             {currentRoute?.title}
           </Heading>
-
-          {/* <LeftArrowIcon />
-      <RightArrowIcon /> */}
         </CardHeader>
       )}
+    </>
+  );
+};
+
+export const QuestionHeader = () => {
+  const { selectedDifficulty, selectedCategoryName } = useSelectedCategory();
+  return (
+    <>
+      <Box className="question-header">
+        <Text>
+          <Text as="b">Category:</Text> {selectedCategoryName?.name}
+        </Text>
+        <Text>
+          <Text as="b">Difficulty:</Text> {selectedDifficulty}
+        </Text>
+      </Box>
     </>
   );
 };

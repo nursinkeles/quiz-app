@@ -1,5 +1,12 @@
 import { ArrowRightIcon } from "@chakra-ui/icons";
 
 export const RightArrowIcon = () => {
-  return <ArrowRightIcon position="absolute" top="6" right="6" />;
+  return (
+    <ArrowRightIcon
+      className="arrow-icon"
+      position="absolute"
+      top="6"
+      right="6"
+    />
+  );
 };

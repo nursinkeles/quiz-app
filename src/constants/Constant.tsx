@@ -28,8 +28,8 @@ export const ROUTE: RouteType[] = [
   {
     pathname: "/questions",
     component: <QuestionsPage />,
-    title: "Questions",
-    class: "card",
+    title: "",
+    class: "dark",
   },
   {
     pathname: "/result",

@@ -33,7 +33,7 @@ export const Container = () => {
     [categoryStatus]
   );
   const isQuizFailed = useMemo(
-    () => quizStatus === ApiStatus.LOADING,
+    () => quizStatus === ApiStatus.FAILED,
     [quizStatus]
   );
   const isCategoryOrQuizFailed = isCategoryFailed || isQuizFailed;

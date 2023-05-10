@@ -1,8 +1,8 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../redux/store";
-import { initialState, Category } from "../types/Type";
-import { fetchCategories } from "../api/api";
+import { initialState, Category, ApiStatus } from "../types/Type";
+import { fetchCategories } from "../services/api";
 
 export const categorySlice = createSlice({
   name: "category",
@@ -19,17 +19,17 @@ export const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCategories.pending.type, (state) => {
-        state.status = "loading";
+        state.status = ApiStatus.LOADING;
       })
       .addCase(
         fetchCategories.fulfilled.type,
         (state, action: PayloadAction<Category[]>) => {
           state.items = action.payload;
-          state.status = "succeeded";
+          state.status = ApiStatus.SUCCESS;
         }
       )
       .addCase(fetchCategories.rejected.type, (state, action: any) => {
-        state.status = "failed";
+        state.status = ApiStatus.FAILED;
         state.error = action.error.message;
       });
   },

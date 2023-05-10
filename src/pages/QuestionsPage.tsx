@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { quizSelector, quizStatusSelector } from "../redux/quizSlice";
+import { quizStatusSelector } from "../redux/quizSlice";
 import { AppDispatch } from "../redux/store";
 import { useSelectedCategory } from "../hooks/useSelectedCategory";
-import { fetchQuestions } from "../api/api";
+import { fetchQuestions } from "../services/api";
 import { ApiStatus } from "../types/Type";
+import { QuestionHeader } from "../components/Header";
+import { Countdown } from "../components/Countdown";
+import { QuestionList } from "../components/QuestionList";
 
 const QuestionsPage = () => {
-  const quiz = useSelector(quizSelector);
   const quizStatus = useSelector(quizStatusSelector);
   const { selectedDifficulty, selectedCategoryId } = useSelectedCategory();
   const dispatch: AppDispatch = useDispatch();
@@ -27,13 +29,11 @@ const QuestionsPage = () => {
   }, [dispatch, quizStatus, selectedCategoryId, selectedDifficulty]);
 
   return (
-    <div>
-      <ul>
-        {quiz.map((item, index) => (
-          <li key={index}>{item.question}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <QuestionHeader />
+      <Countdown />
+      <QuestionList />
+    </>
   );
 };
 export default QuestionsPage;

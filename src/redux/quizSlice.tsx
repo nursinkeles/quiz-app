@@ -2,7 +2,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../redux/store";
 import { QuizState2 } from "../types/Type";
-import { fetchQuestions } from "../api/api";
+import { fetchQuestions } from "../services/api";
 import { ApiStatus } from "../types/Type";
 
 const initialState: QuizState2 = {
@@ -18,17 +18,17 @@ export const quizSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchQuestions.pending.type, (state) => {
-        state.status = "loading";
+        state.status = ApiStatus.LOADING;
       })
       .addCase(
         fetchQuestions.fulfilled.type,
         (state, action: PayloadAction<any>) => {
-          state.items = [...state.items, ...action.payload.results];
-          state.status = "succeeded";
+          state.items = [...state.items, ...action.payload];
+          state.status = ApiStatus.SUCCESS;
         }
       )
       .addCase(fetchQuestions.rejected.type, (state, action: any) => {
-        state.status = "failed";
+        state.status = ApiStatus.FAILED;
         state.error = action.error.message;
       });
   },

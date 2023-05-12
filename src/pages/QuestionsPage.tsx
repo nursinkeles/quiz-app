@@ -4,15 +4,21 @@ import { quizStatusSelector } from "../redux/quizSlice";
 import { AppDispatch } from "../redux/store";
 import { useSelectedCategory } from "../hooks/useSelectedCategory";
 import { fetchQuestions } from "../services/api";
-import { ApiStatus } from "../types/Type";
+import { ApiStatus, QuestionHeaderItem } from "../types/Type";
 import { QuestionHeader } from "../components/Header";
 import { Countdown } from "../components/Countdown";
 import { QuestionList } from "../components/QuestionList";
 
 const QuestionsPage = () => {
   const quizStatus = useSelector(quizStatusSelector);
-  const { selectedDifficulty, selectedCategoryId } = useSelectedCategory();
+  const { selectedDifficulty, selectedCategoryId, selectedCategoryName } =
+    useSelectedCategory();
   const dispatch: AppDispatch = useDispatch();
+
+  const object: QuestionHeaderItem[] = [
+    { title: "Category", value: selectedCategoryName?.name },
+    { title: "Difficulty", value: selectedDifficulty },
+  ];
 
   useEffect(() => {
     selectedCategoryId !== undefined &&
@@ -30,7 +36,7 @@ const QuestionsPage = () => {
 
   return (
     <>
-      <QuestionHeader />
+      <QuestionHeader object={object} />
       <Countdown />
       <QuestionList />
     </>

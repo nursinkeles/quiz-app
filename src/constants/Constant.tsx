@@ -28,7 +28,6 @@ export const ROUTE: RouteType[] = [
   {
     pathname: "/questions",
     component: <QuestionsPage />,
-    title: "",
     class: "dark",
   },
   {
@@ -37,7 +36,7 @@ export const ROUTE: RouteType[] = [
     title: "Quiz Completed!",
     class: "card",
   },
-  { pathname: "/", component: <StartPage />, title: "", class: "gradient" },
+  { pathname: "/", component: <StartPage />, class: "gradient" },
 ];
 
 export const DIFFICULTY: string[] = ["Easy", "Medium", "Hard"];

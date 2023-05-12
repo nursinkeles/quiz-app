@@ -29,6 +29,10 @@ export interface CategoryListProps {
   categories: Category[];
   onCategoryClick: (categoryId: number) => void;
 }
+export type Answer = {
+  answer: string;
+  isCorrect: boolean | null;
+};
 
 interface QuizState {
   items: any[];
@@ -49,6 +53,7 @@ export interface QuizState2 {
   items: any[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error?: string;
+  answers: Answer[];
 }
 
 export interface QuestionRequestParams {
@@ -71,10 +76,24 @@ export type Question = {
 export type RouteType = {
   pathname: string;
   component: JSX.Element;
-  title: string;
+  title?: string;
   class: string;
 };
 
 export type ErrorProps = {
   text: string | undefined;
+};
+
+export type ArrowButtonProps = {
+  direction: "left" | "right";
+  onClick: () => void;
+};
+
+export type QuestionHeaderItem = {
+  title: string;
+  value: string;
+};
+
+export type QuestionHeaderProps = {
+  object: QuestionHeaderItem[];
 };

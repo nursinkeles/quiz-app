@@ -114,6 +114,8 @@
   padding: 5px;
   border-radius: 50%;
   transition: 1000ms;
+  position: absolute;
+  top: 1.5rem;
 
   &:hover {
     color: $dark-color !important;

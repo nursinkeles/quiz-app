@@ -18,10 +18,6 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
-const shuffleArray = (array: string[]) => {
-  return [...array].sort(() => Math.random() - 0.5);
-};
-
 export const fetchQuestions = createAsyncThunk(
   "questions/getQuestion",
   async (params: QuestionRequestParams) => {
@@ -31,6 +27,9 @@ export const fetchQuestions = createAsyncThunk(
     const res = await axios(
       `${process.env.REACT_APP_API_BASE_ENDPOINT}api.php?${queryString}`
     );
+    const shuffleArray = (payload: string[]) => {
+      return [...payload].sort(() => Math.random() - 0.5);
+    };
     const data = res.data.results.map((question: Question) => ({
       ...question,
       options: shuffleArray([

@@ -1,14 +1,19 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { quizSelector } from "../redux/quizSlice";
-import { Text, Box, RadioGroup, Stack, Radio, Grid } from "@chakra-ui/react";
-import { LeftArrowIcon } from "../assets/icon/LeftArrowIcon";
-import { RightArrowIcon } from "../assets/icon/RightArrowIcon";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { quizSelector, answerSelector, setAnswers } from "../redux/quizSlice";
+import { Text, RadioGroup, Stack, Radio, Grid } from "@chakra-ui/react";
+import { ArrowButton } from "./ArrowButton";
 
 export const QuestionList = () => {
   const quiz = useSelector(quizSelector);
+  const answers = useSelector(answerSelector);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const options = quiz[currentQuestionIndex]?.options || [];
 
@@ -22,9 +27,18 @@ export const QuestionList = () => {
     }
   };
 
-  const handleCompleteQuiz = (): void => {
-    console.log("complete");
+  const handleAnswerSelected = (value: string) => {
+    const isCorrect = value === quiz[currentQuestionIndex]?.correct_answer;
+    const answer = { answer: value, isCorrect };
+
+    const newAnswers = [...answers];
+    newAnswers[currentQuestionIndex] = answer;
+
+    dispatch(setAnswers(newAnswers));
+    setSelectedOption(value);
   };
+
+  const handleCompleteQuiz = () => navigate("/result");
 
   const isFirstQuestion = currentQuestionIndex === 0;
   const isLastQuestion = currentQuestionIndex === quiz.length - 1;
@@ -32,14 +46,16 @@ export const QuestionList = () => {
   return (
     <>
       {!isFirstQuestion && (
-        <Box onClick={() => handleNextOrPreviousQuestion(-1)}>
-          <LeftArrowIcon />
-        </Box>
+        <ArrowButton
+          direction="left"
+          onClick={() => handleNextOrPreviousQuestion(-1)}
+        />
       )}
       {!isLastQuestion ? (
-        <Box onClick={() => handleNextOrPreviousQuestion(1)}>
-          <RightArrowIcon />
-        </Box>
+        <ArrowButton
+          direction="right"
+          onClick={() => handleNextOrPreviousQuestion(1)}
+        />
       ) : (
         <Text className="complete-btn" onClick={handleCompleteQuiz}>
           Complete
@@ -56,7 +72,7 @@ export const QuestionList = () => {
       <RadioGroup
         display={"flex"}
         justifyContent={"center"}
-        onChange={(value) => setSelectedOption(value)}
+        onChange={(value) => handleAnswerSelected(value)}
         value={selectedOption}
       >
         <Grid templateColumns="repeat(2, 1fr)" gap={4}>
@@ -66,7 +82,7 @@ export const QuestionList = () => {
               className={`option ${
                 selectedOption === option ? "selected" : ""
               }`}
-              onClick={() => setSelectedOption(option)}
+              onClick={() => handleAnswerSelected(option)}
             >
               <Radio value={option} _checked={{ bg: "#845bb3" }}>
                 <Text className="text">{option}</Text>

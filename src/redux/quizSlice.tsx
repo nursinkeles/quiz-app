@@ -1,19 +1,22 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../redux/store";
-import { QuizState2 } from "../types/Type";
+import { QuizState2, ApiStatus, Answer } from "../types/Type";
 import { fetchQuestions } from "../services/api";
-import { ApiStatus } from "../types/Type";
 
 const initialState: QuizState2 = {
   items: [],
   status: ApiStatus.IDLE,
+  answers: [],
 };
-
 export const quizSlice = createSlice({
   name: "quiz",
   initialState,
-  reducers: {},
+  reducers: {
+    setAnswers: (state, action: PayloadAction<Answer[]>) => {
+      state.answers = action.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -34,9 +37,10 @@ export const quizSlice = createSlice({
   },
 });
 const quizSelector = (state: RootState) => state.quiz.items;
+const answerSelector = (state: RootState) => state.quiz.answers;
 const quizStatusSelector = (state: RootState) => state.quiz.status;
 const quizErrorSelector = (state: RootState) => state.quiz.error;
 
-export { quizSelector, quizStatusSelector, quizErrorSelector };
-
+export { quizSelector, answerSelector, quizStatusSelector, quizErrorSelector };
+export const { setAnswers } = quizSlice.actions;
 export default quizSlice.reducer;

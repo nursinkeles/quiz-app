@@ -153,7 +153,7 @@
   border-radius: 7px;
   padding: 8px;
   width: 106px;
-  height: 100px;
+  height: 80px;
   transition: 2s;
 
   &:hover {
@@ -170,4 +170,30 @@
   .text {
     color: $dark-color;
   }
+}
+.box {
+  width: 15px;
+  height: 7px;
+  margin: 1rem 0;
+}
+.result-box {
+  @include align-center();
+  flex-direction: column;
+  margin: 2rem 0;
+  width: 25%;
+  padding: 0.5rem;
+  color: $secondary-color;
+  background: $primary-color;
+  border: 1px solid $accent-color;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px $accent-color inset;
+  p {
+    font-size: 12px;
+  }
+}
+.result-btn {
+  color: $secondary-color;
+  background: $accent-color !important;
+  font-size: 14px;
+  padding: 1rem 2rem !important;
 }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { quizStatusSelector } from "../redux/quizSlice";
 import { AppDispatch } from "../redux/store";
@@ -8,8 +8,11 @@ import { ApiStatus, QuestionHeaderItem } from "../types/Type";
 import { QuestionHeader } from "../components/Header";
 import { Countdown } from "../components/Countdown";
 import { QuestionList } from "../components/QuestionList";
+import { TimeOutError } from "../components/Error";
 
 const QuestionsPage = () => {
+  const [isTimeUp, setIsTimeUp] = useState(false);
+
   const quizStatus = useSelector(quizStatusSelector);
   const { selectedDifficulty, selectedCategoryId, selectedCategoryName } =
     useSelectedCategory();
@@ -36,9 +39,15 @@ const QuestionsPage = () => {
 
   return (
     <>
-      <QuestionHeader object={object} />
-      <Countdown />
-      <QuestionList />
+      {isTimeUp ? (
+        <TimeOutError />
+      ) : (
+        <>
+          <QuestionHeader object={object} />
+          <Countdown setIsTimeUp={setIsTimeUp} />
+          <QuestionList />
+        </>
+      )}
     </>
   );
 };

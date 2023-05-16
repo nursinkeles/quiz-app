@@ -2,7 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { quizSelector, answerSelector, setAnswers } from "../redux/quizSlice";
-import { Text, RadioGroup, Stack, Radio, Grid } from "@chakra-ui/react";
+import {
+  Text,
+  RadioGroup,
+  Stack,
+  Radio,
+  Grid,
+  Flex,
+  Box,
+} from "@chakra-ui/react";
 import { ArrowButton } from "./ArrowButton";
 
 export const QuestionList = () => {
@@ -61,6 +69,16 @@ export const QuestionList = () => {
           Complete
         </Text>
       )}
+
+      <Flex justifyContent="center" gap="2">
+        {quiz.map((item: string, index: number) => (
+          <Box
+            key={index}
+            className="box"
+            bg={index <= currentQuestionIndex ? "#845bb3" : "#d0bdf4"}
+          />
+        ))}
+      </Flex>
 
       <Text color="#a0d2eb" fontSize="xs">
         QUESTION {currentQuestionIndex + 1} OF {quiz.length}

@@ -97,3 +97,7 @@ export type QuestionHeaderItem = {
 export type QuestionHeaderProps = {
   object: QuestionHeaderItem[];
 };
+
+export interface CountdownProps {
+  setIsTimeUp: React.Dispatch<React.SetStateAction<boolean>>;
+}

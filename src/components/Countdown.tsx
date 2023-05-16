@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Box, CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
+import { CountdownProps } from "../types/Type";
 
-export const Countdown = () => {
+export const Countdown = ({ setIsTimeUp }: CountdownProps) => {
   const [remainingTime, setRemainingTime] = useState(120);
 
   useEffect(() => {
@@ -10,8 +11,7 @@ export const Countdown = () => {
     }, 1000);
     if (remainingTime === 0) {
       clearInterval(intervalId);
-      console.log("Süre doldu!");
-      //buraya alert gibi bi  şey çıksın alertin içinde result ekranına yönlendiren buton olsun
+      setIsTimeUp(true);
     }
     return () => clearInterval(intervalId);
   }, [remainingTime]);
